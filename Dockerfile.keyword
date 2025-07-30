@@ -1,0 +1,27 @@
+# Dockerfile
+#  빌드 시점(ARG, --build-arg ) 과 
+# docker build --build-arg APP_PORT=1111 --build-arg APP_NAME=FLASK -t myimage . 
+# docker run myimage
+
+# 런타임 시점(ENV) 에 환경변수를 다르게 사용합니다.
+# docker run --env-file .env myimage
+
+FROM alpine
+
+# 기본 쉘 도구 설치 (echo 테스트용)
+RUN apk add --no-cache bash
+
+# 빌드할 때 넘겨줄 변수
+ARG APP_NAME
+ARG APP_PORT
+
+# 환경변수 선언
+# 빌드된 이미지 안에서도 쓰고 싶다면 ENV로 다시 지정
+ENV APP_NAME=${APP_NAME}
+# ENV APP_NAME=default-name
+ENV APP_PORT=${APP_PORT}
+
+# 실행 시 환경변수 출력 - RUN은 빌드시점, CMD는 실행시점 
+RUN echo "Running $APP_NAME on port $APP_PORT"
+# CMD echo "Running $APP_NAME on port $APP_PORT"
+CMD ["sh", "-c", "echo Running $APP_NAME on port $APP_PORT"]
