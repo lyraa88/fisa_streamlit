@@ -8,6 +8,7 @@
 
 FROM alpine
 
+
 # 기본 쉘 도구 설치 (echo 테스트용)
 RUN apk add --no-cache bash
 
