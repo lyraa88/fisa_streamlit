@@ -24,4 +24,4 @@ EXPOSE 8501
 # 내릴 명령어를 실행하는 키워드
 
 
-CMD ["streamlit", "run", "app.py", "--server.enableCORS=false"]
+CMD streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
